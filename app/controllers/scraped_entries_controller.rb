@@ -1,0 +1,2 @@
+class ScrapedEntriesController < ApplicationController
+end
