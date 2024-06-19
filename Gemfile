@@ -70,3 +70,7 @@ group :test do
   gem "selenium-webdriver"
 
 end
+
+# Add the Nokogiri gem
+gem 'nokogiri'
+gem 'sanitize'
