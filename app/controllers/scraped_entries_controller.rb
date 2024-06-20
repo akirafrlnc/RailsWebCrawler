@@ -1,4 +1,5 @@
 require "open-uri"
+require "nokogiri"
 
 class ScrapedEntriesController < ApplicationController
   def scrape_data

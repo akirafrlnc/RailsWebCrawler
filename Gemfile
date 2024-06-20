@@ -73,4 +73,3 @@ end
 
 # Add the Nokogiri gem
 gem 'nokogiri'
-gem 'sanitize'
