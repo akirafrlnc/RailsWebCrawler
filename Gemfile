@@ -68,8 +68,17 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-
 end
 
 # Add the Nokogiri gem
-gem 'nokogiri'
+gem "nokogiri"
+
+# Add RSpec
+group :development, :test do
+  gem "rspec-rails"
+end
+# Add FactoryBot and Faker for testing
+group :test do
+  gem "factory_bot_rails"
+  gem "faker"
+end
