@@ -23,9 +23,17 @@ end
 RSpec.describe ScrapedEntriesController, type: :controller do
   describe "POST #scrape_data" do
     it "creates scraped entries and returns success message" do
+      # Count the number of ScrapedEntry records before the action
+      count_before = ScrapedEntry.count
+			# run the action
       post :scrape_data
+      # Check if the response status is successful
       expect(response).to have_http_status(:success)
-      expect(JSON.parse(response.body)["message"]).to eq("Data scraped and saved successfully")
+      # Count the number of ScrapedEntry records after the action
+      count_after = ScrapedEntry.count
+
+      # Ensure that the number of records has increased after the action
+      expect(count_after).to be > count_before
     end
   end
 end
@@ -36,9 +44,9 @@ RSpec.describe ScrapedEntriesController, type: :controller do
   describe "POST #filter_by_title_length_and_comments" do
     it "filters entries by word count and comments, and creates data successfully" do
       post :filter_by_title_length_and_comments
-
+      # Check if the response status is successful
       expect(response).to have_http_status(:success)
-
+      # Ensure that filtered entries are not empty
       filtered_entries = controller.instance_variable_get(:@filtered_entries)
       expect(filtered_entries).not_to be_empty
 
@@ -53,6 +61,7 @@ RSpec.describe ScrapedEntriesController, type: :controller do
 
       # Check if data creation is successful
       stored_entries = controller.instance_variable_get(:@stored_entries)
+      # Ensure that stored entries are not empty
       expect(stored_entries).not_to be_empty
     end
   end
@@ -79,7 +88,7 @@ RSpec.describe ScrapedEntriesController, type: :controller do
 
       # Check if data creation is successful
       stored_entries = controller.instance_variable_get(:@stored_entries)
-      # binding.pry # Execution will pause here
+      # Ensure that stored entries are not empty
       expect(stored_entries).not_to be_empty
     end
   end
