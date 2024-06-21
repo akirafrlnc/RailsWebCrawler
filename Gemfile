@@ -75,10 +75,19 @@ gem "nokogiri"
 
 # Add RSpec
 group :development, :test do
+  # Add RSpec
   gem "rspec-rails"
-end
-# Add FactoryBot and Faker for testing
-group :test do
+
+  # Add FactoryBot and Faker for testing
   gem "factory_bot_rails"
   gem "faker"
+
+  # Add shoulda-matchers for testing validations
+  gem "shoulda-matchers"
+
+  # Add rails-controller-testing for testing controllers
+  gem "rails-controller-testing"
 end
+
+# Add pry for debugging
+gem "pry"
