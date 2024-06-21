@@ -1,10 +1,11 @@
-Architecture Decision Record (ADR) for Web Crawler with Filtering Operations in Rails using SQLite3
-Title: Designing a Web Crawler for Extracting and Filtering Data from https://news.ycombinator.com/ using Rails with SQLite3
+## Designing a Web Crawler for Extracting and Filtering Data from https://news.ycombinator.com/ using Rails with SQLite3
 
-Context
-We are tasked with building a web crawler in a Rails application to extract the first 30 entries from https://news.ycombinator.com/ and perform filtering operations based on title word count and ordering by comments/points. The solution should store usage data and provide insights into user interaction and crawler behavior.
+### Context
 
-Decision
+building a web crawler in a Rails application to extract the first 30 entries from https://news.ycombinator.com/ and perform filtering operations based on title word count and ordering by comments/points. The solution should store usage data.
+
+### Decision
+
 1. Web Scraping Gem: Utilize the Nokogiri gem in Rails for web scraping to extract data from the website.
 
 2. Data Extraction: Parse the HTML content to extract the number, title, points, and number of comments for each entry.
@@ -14,20 +15,15 @@ Decision
 4. Filtering Operations:
 Implement filtering logic in the Rails application to filter entries based on title word count greater than 5 or less and ordering by comments/points.
 
-5. Code Organization: Follow Rails conventions and MVC pattern to ensure clean, well-structured code, avoiding repetition, and maintaining consistency.
+5. Testing: Implement automated tests using RSpec to validate the model, extracting and filtering operations.
 
-6. Version Control: Utilize Git for version control, maintaining a good commit history.
+###Consequences
 
-7. Automated Testing: Implement automated tests using RSpec to validate the extracting and filtering operations.
+- By using the Nokogiri gem for web scraping in Rails, we ensure efficient data extraction from the website.
 
-8.Documentation: Provide detailed documentation explaining key design decisions, code organization, and additional fields tracked for user interaction and crawler behavior.
+- Storing data in a SQLite3 database allows for tracking crawler behavior.
 
-Consequences
--By using the Nokogiri gem for web scraping in Rails, we ensure efficient data extraction from the website.
--Storing data in a SQLite3 database allows for effective tracking of user interactions and crawler behavior.
--Following Rails conventions and MVC pattern enhances code maintainability and readability.
--Automated testing with RSpec ensures the correctness of filtering operations and overall system reliability.
--Detailed documentation and a ReadMe file provide clarity and guidance for users interacting with the Rails application.
+- Automated testing with RSpec ensures the correctness of extracting and filtering operations.
 
 
 ## Overview
@@ -37,37 +33,50 @@ This Rails application implements a web crawler to extract data from Hacker News
 ### Ruby Version
 - Ruby version: 3.1.2
 
+### Rails Version
+- Rails version: 7.0.8.4
+
 ### System Dependencies
 - Nokogiri gem
-- OpenURI gem
-
-## Configuration
-- Add any additional configuration steps here.
 
 ## Database
 ### Database Creation
-sqlite3
+- sqlite3
 
 ### Database Initialization
-- Provide steps for initializing the database.
 splite3 is a default database for this rails project.
 run the command below to create database:
-rails db:migrate
+
+		rails db:migrate
 
 ## Running the Application
 run the local server with the command:
-rails s
+
+		rails s
 
 and go to the links below to see desired results from the site.
 the first 30 entries
-http://localhost:3000/scrape_data
+
+		http://localhost:3000/scrape_data
 
 filter by title length greater than 5 and ordered by comments
-http://localhost:3000/filter_by_title_length_and_comments
+
+		http://localhost:3000/filter_by_title_length_and_comments
 
 filter by title length less than or equal to 5 words and ordered by points
-http://localhost:3000/filter_by_title_length_and_points
+
+		http://localhost:3000/filter_by_title_length_and_points
 
 ### How to Run the Test Suite
+
+- dependencies in Gemfile
+
+  gem "rspec-rails"
+
+  gem "shoulda-matchers"
+
+	gem "rails-controller-testing"
+
 - Run the test suite using:
-bundle exec rspec spec/controllers/scraped_entries_controller_spec.rb
+
+	bundle exec rspec

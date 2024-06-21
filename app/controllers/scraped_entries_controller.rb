@@ -4,6 +4,7 @@ require "nokogiri"
 class ScrapedEntriesController < ApplicationController
 	# disable CSRF protection for post request without using views
 	protect_from_forgery with: :null_session
+	
   def scrape_data
     begin
       @scraped_data = scrape_entries  # Store scraped data in @scraped_data
